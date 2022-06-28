@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+</head>
+<body>
+<div class="container border border-secondary rounded">
+
+    <div>
+        <img class="img-fluid col-4" th:src="@{/images/mediscreen.jpg}">
+    </div>
+
+        <h2 class="mb-5 text-center  "><u>All patients</u></h2>
+
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Date of born</th>
+            <th>Action</th>
+            <th>Notes</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="patient : ${patients}">
+            <td th:text="${patient.firstname}"></td>
+            <td th:text="${patient.lastname}"></td>
+            <td th:text="${patient.dateOfBorn}"></td>
+            <td style="width: 15%" class="text-center">
+                <a th:href="@{/patient/get/{id}(id=${patient.id})}">Infos</a>&nbsp;|&nbsp;
+                <a th:href="@{/patient/update/{id}(id=${patient.id})}">Update</a>
+            </td>
+            <td ><a th:href="@{/note/list/{id}(id=${patient.id})}"><img th:src="@{/images/note.png}" class="rounded mx-auto d-block mb-3" ></a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

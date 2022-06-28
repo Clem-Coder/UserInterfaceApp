@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+</head>
+<body>
+<div class="container border border-secondary rounded">
+
+    <div>
+        <img class="img-fluid col-4" th:src="@{/images/mediscreen.jpg}">
+    </div>
+
+    <form ACTION="#" method="post" th:action="@{/patient/update/{id}(id=${patient.id})}" th:object="${patient}">
+
+        <h2 class="mb-5 text-center  "><u>Modify patient informations</u></h2>
+
+
+        <div class="form-group text-center">
+            <label class="col-sm-2 control-label" for="Firstname">Firstname</label>
+            <div class="text-center">
+                <input class="col-4 border border-secondary rounded bg-light" id="Firstname" placeholder="Firstname" th:field="*{firstname}" type="text">
+                <p class="text-danger" th:errors="*{firstname}" th:if="${#fields.hasErrors('firstname')}"></p>
+            </div>
+        </div>
+        <div class="form-group text-center">
+            <label class="col-sm-2 control-label" for="Lastname">Lastname</label>
+            <div class="text-center">
+                <input class="col-4 border border-secondary rounded bg-light" id="Lastname" placeholder="Lastname" th:field="*{lastname}" type="text">
+                <p class="text-danger" th:errors="*{lastname}" th:if="${#fields.hasErrors('lastname')}"></p>
+            </div>
+        </div>
+
+        <div class="form-group text-center">
+            <label class="col-sm-2 control-label" for="Birthdate">Date of born</label>
+            <div class="text-center">
+                <input id="Birthdate" max="2022-07-01" min="1900-01-01" name="Birthdate" th:field="*{dateOfBorn}" type="date">
+                <p class="text-danger" th:errors="*{dateOfBorn}" th:if="${#fields.hasErrors('dateOfBorn')}"></p>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center mb-2  ">
+            <div class="d-flex flex-column justify-content-center col-2 ">
+                <label class="col-sm-2 control-label ml-4" for="sex">Gender</label>
+                <select class="text-center mt-3 " th:field="*{sex}">
+                    <option th:text="Male" th:value="'M'"></option>
+                    <option th:text="Female" th:value="'F'"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group text-center">
+            <label class="col-sm-2 control-label" for="Address">Address</label>
+            <div class="text-center">
+                <input class="col-4 border border-secondary rounded bg-light" id="Address" placeholder="Address" th:field="*{address}" type="text">
+                <p class="text-danger" th:errors="*{address}" th:if="${#fields.hasErrors('address')}"></p>
+            </div>
+        </div>
+        <div class="form-group text-center">
+            <label class="col-sm-2 control-label" for="Phone number">Phone number</label>
+            <div class="text-center">
+                <input class="col-4 border border-secondary rounded bg-light" id="Phone number" placeholder="Phone number" th:field="*{phoneNumber}"
+                       type="text">
+                <p class="text-danger" th:errors="*{phoneNumber}" th:if="${#fields.hasErrors('phoneNumber')}"></p>
+            </div>
+        </div>
+        <br>
+        <div class="col-4 mx-auto ">
+            <div class="d-flex justify-content-between mb-5 ">
+                <a class="btn btn-secondary text-white btn-sm col-5" th:href="@{/}" >Back homepage</a>
+                <button type="submit" class="btn btn-primary btn-sm col-5 " >Update</button>
+            </div>
+        </div>
+        </form>
+</div>
+</body>
+</html>

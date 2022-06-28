@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/assess/style.css">
+    <script src="https://kit.fontawesome.com/5f1aebf432.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container border border-secondary rounded">
+    <div class="d-flex align-items-center">
+        <div>
+            <img th:src="@{/images/mediscreen.jpg}"   >
+        </div>
+
+        <div class="charging">
+            <h5 class="text-success">Patient risk calculation</h5>
+            <div class="fa-3x">
+                <i class="fa-solid fa-sync fa-spin"></i>
+            </div>
+        </div>
+
+    </div>
+
+
+    <h2 class="mb-5 text-center "><u>Patient report</u></h2>
+
+
+
+    <div class="infos">
+        <div class="text-center">
+            <small  class="form-text mb-2 ">Firstname</small>
+            <output class="border border-secondary rounded bg-light text-center col-5 " ><h4 th:text="${patientReport.firstname}"></h4></output>
+        </div>
+        <div class="text-center mt-4">
+            <small  class="form-text mb-2 ">Lastname</small>
+            <output class="border border-secondary rounded bg-light text-center col-5 " ><h4 th:text="${patientReport.lastname}"></h4></output>
+        </div>
+        <div class="col-5 mx-auto">
+            <div class="text-center mt-3">
+                <small  class="form-text mb-2 text-center  ">Address</small>
+                <output class="border border-secondary rounded bg-light text-center col-12 " ><h4 th:text="${patientReport.address}"></h4></output>
+            </div>
+            <div class="d-flex">
+                <div class="col-8">
+                    <div class="mt-3 ">
+                        <small  class="form-text mb-2 text-center  ">Age</small>
+                        <output class="border border-secondary rounded bg-light text-center col-12 " ><h4 th:text="${patientReport.age}"></h4></output>
+
+                    </div>
+                    <div class="mt-3">
+                        <small  class="form-text mb-2 text-center  ">Gender</small>
+                        <output class="border border-secondary rounded bg-light text-center col-12 " ><h4 th:text="${patientReport.sex}"></h4></output>
+                    </div>
+
+                    <div class="mt-3">
+                        <small  class="form-text mb-2 text-center  ">Phone number</small>
+                        <output class="border border-secondary rounded bg-light text-center col-12 " ><h4 th:text="${patientReport.phoneNumber}"></h4></output>
+                    </div>
+                </div>
+                <div class="mx-auto mt-5 text-center">
+
+                        <div th:if="${patientReport.riskLevel == 'Borderline'}">
+                            <div class="resultBorderline"></div>
+                            <h5 class="text-warning " th:text="${patientReport.riskLevel}"></h5>
+                        </div>
+                        <div th:if="${patientReport.riskLevel == 'In Danger'}">
+                            <div class="resultDanger"></div>
+                            <h5 class="text-danger " th:text="${patientReport.riskLevel}"></h5>
+                        </div>
+                        <div th:if="${patientReport.riskLevel == 'Early onset'}">
+                            <div class="resultDanger"></div>
+                            <h5 class="text-danger " th:text="${patientReport.riskLevel}"></h5>
+                        </div>
+                        <div class="col-12" th:if="${patientReport.riskLevel == 'None'}">
+                            <div class="resultNone"></div>
+                            <h5 class="text-success " th:text="${patientReport.riskLevel}"></h5>
+                        </div>
+                </div>
+            </div>
+            <br>
+            <div class=" d-flex justify-content-center ">
+                <a class="btn btn-secondary text-white btn-lg " th:href="@{/}" >Back homepage</a>
+            </div>
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../css/note/style.css">
+    <script src= "/js/script.js" defer></script>
+</head>
+<body>
+<div class="container">
+
+    <div class="mediscreen">
+        <img th:src="@{/images/mediscreen.jpg}" class="img-fluid col-4"  >
+    </div>
+
+    <h1 ><u>Patient history</u></h1>
+
+    <div class="buttonCenter">
+        <button class="addButton" >Add note</button>
+    </div>
+    <div class="messages">
+        <small  th:if="${addSuccess}" th:text="${addSuccess}" class="successMessage"></small>
+        <small  th:if="${patientNotesEmpty}" th:text="${patientNotesEmpty}" class="errorMessage"></small>
+    </div>
+
+
+    <div th:if="!${addError}">
+        <dialog class="dialogAdd">
+            <button class="close-button-dialogAdd"><img th:src="@{/images/croix.png}" ></button>
+            <form ACTION="#" method="post" th:action="@{/note/add/{id}(id=${patientNote.patientId})}"
+                  th:object="${patientNote}">
+                <div class="patient-infos" >
+                    <h3><b><u>Add note</u></b></h3>
+                    <div>
+                        <label class="col-sm-2 control-label" for="Practitioner">Practitioner</label>
+                        <div class="text-center">
+                            <input class="inputForm" type="text" id="Practitioner" th:field="*{practitionerName}" ><br><br>
+                            <p class="text-danger" th:errors="*{practitionerName}" th:if="${#fields.hasErrors('practitionerName')}"></p>
+                        </div>
+                    </div>
+                    <input class="inputForm" type="hidden"  th:field="*{patientId}" ><br><br>
+
+                    <h3><b><u> Practitioner's notes/recommendations:</u></b></h3>
+                    <div class="doctor">
+                    <textarea class="textArea" cols="max" th:field="*{note}">
+                    </textarea>
+                    </div>
+                    <br>
+                    <button class="submitButton" type="submit" >Add note</button>
+                </div>
+            </form>
+        </dialog>
+    </div>
+
+
+    <div th:if="${addError}">
+        <dialog class="dialogAdd" id="dialogAddError">
+            <button class="close-button-dialogAdd"><img th:src="@{/images/croix.png}" ></button>
+            <form ACTION="#" method="post" th:action="@{/note/add/{id}(id=${patientNote.patientId})}" th:object="${patientNote}">
+                <div class="patient-infos" >
+                    <h3><b><u>Add note</u></b></h3>
+                    <div>
+                        <label for="Practitioner">Practitioner</label>
+                        <div class="text-center">
+                            <p class="errorMessage" th:errors="*{practitionerName}" th:if="${#fields.hasErrors('practitionerName')}"></p>
+                            <input class="inputForm" type="text" id="Practitioner" th:field="*{practitionerName}" ><br><br>
+                        </div>
+                    </div>
+                    <input class="inputForm" type="hidden"  th:field="*{patientId}" ><br><br>
+                    <h3><b><u> Practitioner's notes/recommendations:</u></b></h3>
+                    <p class="errorMessage" th:errors="*{note}" th:if="${#fields.hasErrors('note')}"></p>
+                    <div class="doctor">
+                        <textarea class="textArea" cols="max" th:field="*{note}"></textarea>
+                    </div>
+                    <br>
+                    <button class="submitButton" type="submit" >Add note</button>
+                </div>
+            </form>
+        </dialog>
+    </div>
+    <br>
+    <br>
+
+
+    <div class="dialogButton" >
+        <div th:each="patientNote: ${patientNotes}" class="dialogFlex" >
+            <div >
+                <h3 class="text-center" th:text=" ${patientNote.date}"><b><u></u></b></h3>
+                <div>
+                    <button class="open-button"><img th:src="@{/images/note2.png}" ></button>
+                    <dialog class="dialog">
+                        <button class="close-button"><img th:src="@{/images/croix.png}" ></button>
+                        <div class="patient-infos">
+                            <h3><b><u>Note</u></b></h3>
+                            <div class="infos">
+                                <h5 class="info" th:if="${patientNote.practitionerName != null}"><u>Practitioner:</u> <output th:text=" ${patientNote.practitionerName}"></output></h5>
+                                <h5 class="info"><u>Date:</u> <output th:text=" ${patientNote.date}"></output></h5>
+                            </div>
+                            <h3><b><u> Practitioner's notes/recommendations:</u></b></h3>
+                            <div class="doctor">
+                                <output th:text=" ${patientNote.note}"></output>
+                            </div>
+                        </div>
+                    </dialog>
+                </div>
+            </div>
+         </div>
+    </div>
+    <br>
+    <br>
+    <div class="backHomeCenter">
+        <a class="backHome" th:href="@{/}" >Back homepage</a>
+    </div>
+    <br>
+    <br>
+
+</div>
+</body>
+</html>
