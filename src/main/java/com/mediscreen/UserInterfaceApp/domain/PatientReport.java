@@ -23,4 +23,18 @@ public class PatientReport {
 
     private String riskLevel;
 
+    public PatientReport(){
+
+    }
+
+    public PatientReport(String firstname, String lastname, int age, String sex, String address, String phoneNumber, String riskLevel) {
+
+        this.firstname   = firstname;
+        this.lastname    = lastname;
+        this.age         = age;
+        this.sex         = sex;
+        this.address     = address;
+        this.phoneNumber = phoneNumber;
+        this.riskLevel   = riskLevel;
+    }
 }

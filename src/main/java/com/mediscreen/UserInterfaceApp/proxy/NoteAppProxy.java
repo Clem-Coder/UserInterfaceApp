@@ -9,11 +9,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-@FeignClient( contextId = "Note", name="noteApp", url="http://localhost:8082")
+@FeignClient( contextId = "Note", name="noteApp", url="${noteAppUrl}")
 public interface NoteAppProxy {
 
     @GetMapping("/patHistory/list/{id}")
     public List<PatientNote> getPatHistory(@PathVariable Integer id);
+
+    @GetMapping("/patHistory/notes/get/{id}")
+    public List<String> getNotesById(@PathVariable Integer id);
 
     @PostMapping("/patHistory/add/{id}")
     public void addPatientNote(@PathVariable Integer id, @RequestBody PatientNote patientNote);

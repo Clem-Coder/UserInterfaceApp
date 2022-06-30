@@ -21,7 +21,7 @@ public class AssessAppController {
     @GetMapping("/assess/{id}")
     public String getPatientReport(@PathVariable Integer id, Model model){
         model.addAttribute("patientReport",assessAppProxy.getPatientReport(id)) ;
-        return "/assess/get";
+        return "assess/get";
     }
 
 }

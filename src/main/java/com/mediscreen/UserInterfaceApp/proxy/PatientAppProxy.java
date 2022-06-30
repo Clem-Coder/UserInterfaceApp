@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(contextId = "Patient" , name="patientApp", url="http://localhost:8081")
+@FeignClient(contextId = "Patient" , name="patientApp", url="${patientAppUrl}")
 public interface PatientAppProxy {
 
     @GetMapping("/patient/list")

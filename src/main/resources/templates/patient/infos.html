@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Patient infos</title>
     <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="icon" href="/images/favicon.png" />
 </head>
 <body>
 <div class="container border border-secondary rounded">
 
     <div>
-        <img th:src="@{/images/mediscreen.jpg}" class="img-fluid col-4"  >
+        <a th:href="@{/}"><img th:src="@{/images/mediscreen.jpg}" class="img-fluid col-4"></a>
     </div>
 
     <form ACTION="#" th:action="@{/patient/update/{id}(id=${patient.id})}" th:object="${patient}" method=get>
