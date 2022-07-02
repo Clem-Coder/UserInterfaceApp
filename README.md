@@ -33,7 +33,7 @@ UserInterfaceAPP name -> interface
 
 go to the location of the docker-compose with terminal and run the command : docker-compose up
 
-### Use Pay my buddy
+### Use Mediscreen
 
 Once all the application are running in a docker container, go on : http://(docker-machine-ip):8080/
 
