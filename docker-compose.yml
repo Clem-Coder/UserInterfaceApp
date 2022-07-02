@@ -1,0 +1,91 @@
+version : "3.3"
+
+services:
+    mongodb :
+        image: mongo
+        container_name: mongodb
+        ports:
+            - "2717:27017"
+        environment:
+            DATABASE: patient_note
+        volumes:
+            - mongodb-data:/data/db
+
+
+    mysql:
+        image: mysql:latest
+        container_name: mysql
+        restart: always
+        ports:
+            - "3307:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: rootroot
+            MYSQL_DATABASE: patient
+        volumes:
+            - mysql-data:/var/lib/mysql
+
+    patient_service:
+        image: patientapp
+        container_name: patient_app
+        depends_on:
+            - mysql
+        environment:
+            DATABASE_HOST: mysql
+            DATABASE_PORT: 3306
+            DATABASE_NAME: patient
+            USERNAME: root
+            PASSWORD: rootroot
+        ports:
+            - "8081:8081"
+
+
+
+
+    note_service:
+        image: noteapp
+        container_name: note_app
+        depends_on:
+            - mongodb
+        environment:
+            MONGO_HOST: mongodb
+            MONGO_PORT: 27017
+            MONGO_DATABASE: patient_note
+        ports:
+            - "8082:8082"
+
+
+    assess_service:
+        image: assessapp
+        container_name: assess_app
+        depends_on:
+            - patient_service
+            - note_service
+        environment:
+            PATIENT_URL: http://192.168.1.28:8081
+            NOTE_URL: http://192.168.1.28:8082
+        ports:
+            -   "8083:8083"
+
+
+    interface_service:
+        build: .
+        image: interface
+        container_name: interface_app
+        depends_on:
+            - note_service
+            - patient_service
+            - assess_service
+        environment:
+            PATIENT_URL: http://192.168.1.28:8081
+            NOTE_URL: http://192.168.1.28:8082
+            ASSESS_URL: http://192.168.1.28:8083
+        ports:
+            -   "8080:8080"
+
+
+volumes:
+    mongodb-data:
+    mysql-data:
+
+
+
