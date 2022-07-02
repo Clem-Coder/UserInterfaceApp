@@ -49,4 +49,12 @@ public class Patient {
         this.address     = address;
         this.phoneNumber = phoneNumber;
     }
+
+    public Patient(String firstname, String lastname, LocalDate dateOfBorn, String sex) {
+
+        this.firstname  = firstname;
+        this.lastname   = lastname;
+        this.dateOfBorn = dateOfBorn;
+        this.sex        = sex;
+    }
 }

@@ -33,7 +33,7 @@ public class AssessAppController {
 
     @GetMapping("/assess/{id}")
     public String getPatientReport(@PathVariable Integer id, Model model){
-        logger.info("New request: Get patient report");
+        logger.info("New request: Get patient r");
         model.addAttribute("patientReport",assessAppProxy.getPatientReport(id)) ;
         return "assess/get";
     }
